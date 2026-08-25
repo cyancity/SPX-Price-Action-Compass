@@ -14,6 +14,10 @@ const PATTERN_CATEGORIES = [
   { val: "TRIANGLE", label: "收敛整理 (Triangle)" },
 ];
 
+const CROSSHAIR_DATE_BADGE_MAX_WIDTH = 220;
+const CROSSHAIR_DATE_BADGE_HEIGHT = 28;
+const CROSSHAIR_DATE_FONT_SIZE = 14;
+
 const getPatternLabel = (type: string, name: string): string => {
   switch (type) {
     case "PIN_BAR_BULLISH": return "↗ 看涨 Pin Bar";
@@ -286,12 +290,13 @@ export default function PriceActionChart({
   const priceRange = Math.max(0.01, maxPrice - minPrice);
 
   // Chart dimensions
-  const xAxisHeight = 20;
+  const xAxisHeight = CROSSHAIR_DATE_BADGE_HEIGHT;
   const volumeHeight = isFullscreen ? 80 : 50;
   const chartHeight = Math.max(180, containerHeight - xAxisHeight - (showVolume ? volumeHeight : 0));
   const totalChartHeight = chartHeight + (showVolume ? volumeHeight : 0);
   const chartWidth = containerWidth;
   const candleAreaWidth = chartWidth - 60; // 60px reserved for the left-side Y-axis column
+  const crosshairDateBadgeWidth = Math.min(CROSSHAIR_DATE_BADGE_MAX_WIDTH, candleAreaWidth);
 
   // Coordinate projection helper
   const getX = (indexInVisible: number) => {
@@ -571,9 +576,9 @@ export default function PriceActionChart({
       const clientX = e.clientX - rect.left;
       const clientY = e.clientY - rect.top;
       
-      // Map client position to SVG viewBox coordinates (width = 720, height = totalChartHeight + 20)
+      // Map client position to SVG viewBox coordinates
       const svgX = (clientX / rect.width) * chartWidth;
-      const svgY = (clientY / rect.height) * (totalChartHeight + 20);
+      const svgY = (clientY / rect.height) * (totalChartHeight + xAxisHeight);
       
       // Only track candles & show crosshair if mouse is inside the active candle area (60 to 720)
       if (svgX >= 60 && svgX <= chartWidth && svgY >= 0 && svgY <= totalChartHeight) {
@@ -657,7 +662,7 @@ export default function PriceActionChart({
       const relativeY = clientY - rect.top;
       
       const svgX = (relativeX / rect.width) * chartWidth;
-      const svgY = (relativeY / rect.height) * (totalChartHeight + 20);
+      const svgY = (relativeY / rect.height) * (totalChartHeight + xAxisHeight);
       
       if (svgX >= 60 && svgX <= chartWidth && svgY >= 0 && svgY <= totalChartHeight) {
         const clampedX = Math.max(60, Math.min(chartWidth, svgX));
@@ -772,7 +777,7 @@ export default function PriceActionChart({
       setStartIndex(nextStart);
 
       // Immediately refresh the crosshair coordinates to keep it perfectly snapped
-      const svgY = (e.clientY - rect.top) / rect.height * (totalChartHeight + 20);
+      const svgY = (e.clientY - rect.top) / rect.height * (totalChartHeight + xAxisHeight);
       if (clampedX >= 60 && clampedX <= chartWidth && svgY >= 0 && svgY <= totalChartHeight) {
         const candleWidth = candleAreaWidth / nextZoom;
         const relativeIndex = Math.floor((clampedX - 60) / candleWidth);
@@ -1452,7 +1457,7 @@ export default function PriceActionChart({
           📱 提示：单指左右拖动平移，双指捏合缩放 K 线
         </div>
         <svg
-          viewBox={`0 0 ${chartWidth} ${totalChartHeight + 20}`}
+          viewBox={`0 0 ${chartWidth} ${totalChartHeight + xAxisHeight}`}
           width="100%"
           height="100%"
           className="overflow-visible"
@@ -1471,7 +1476,7 @@ export default function PriceActionChart({
             x={0}
             y={0}
             width={60}
-            height={totalChartHeight + 20}
+            height={totalChartHeight + xAxisHeight}
             fill="#050608"
           />
 
@@ -1480,7 +1485,7 @@ export default function PriceActionChart({
             x={60}
             y={totalChartHeight}
             width={candleAreaWidth}
-            height={20}
+            height={xAxisHeight}
             fill="#050608"
           />
 
@@ -1489,7 +1494,7 @@ export default function PriceActionChart({
             x1={60}
             y1={0}
             x2={60}
-            y2={totalChartHeight + 20}
+            y2={totalChartHeight + xAxisHeight}
             className="stroke-[#1e222d] stroke-[1]"
           />
           <line
@@ -1680,9 +1685,25 @@ export default function PriceActionChart({
                 </text>
               </g>
               {/* Date/Time badge (bottom X-axis, centered on candle inside 60 to 720) */}
-              <g transform={`translate(${Math.max(60 + 75, Math.min(chartWidth - 75, crosshairPos.x)) - 75}, ${totalChartHeight + 1})`}>
-                <rect x={0} y={0} width={150} height={16} rx={0} fill="#ffffff" stroke="#000000" strokeWidth={1} />
-                <text x={75} y={11} textAnchor="middle" className="fill-black font-mono text-[8px] font-black">
+              <g transform={`translate(${Math.max(60, Math.min(chartWidth - crosshairDateBadgeWidth, crosshairPos.x - crosshairDateBadgeWidth / 2))}, ${totalChartHeight})`}>
+                <rect
+                  x={0}
+                  y={0}
+                  width={crosshairDateBadgeWidth}
+                  height={CROSSHAIR_DATE_BADGE_HEIGHT}
+                  rx={0}
+                  fill="#ffffff"
+                  stroke="#000000"
+                  strokeWidth={1}
+                />
+                <text
+                  x={crosshairDateBadgeWidth / 2}
+                  y={19}
+                  textAnchor="middle"
+                  fontSize={CROSSHAIR_DATE_FONT_SIZE}
+                  fontWeight={700}
+                  className="fill-black font-mono"
+                >
                   {crosshairPos.dateStr}
                 </text>
               </g>
