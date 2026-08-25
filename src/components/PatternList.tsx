@@ -162,7 +162,7 @@ export default function PatternList({
 
             <div className="grid grid-cols-2 gap-3 mt-2 sm:mt-4">
               {zones.length === 0 ? (
-                <div className="col-span-2 text-[11px] text-neutral-400 text-center py-6 font-mono border border-dashed border-neutral-800 rounded-xl bg-neutral-900/10">
+                <div className="col-span-2 text-[11px] text-neutral-300 text-center py-6 font-mono border border-dashed border-neutral-800 rounded-xl bg-neutral-900/10">
                   暂未检测到筹码共识关键位，平移图表即可触发计算
                 </div>
               ) : (
@@ -240,7 +240,7 @@ export default function PatternList({
 
                         {/* Consensus times and elegant progress bar */}
                         <div className="mt-2">
-                          <div className="flex items-center justify-between text-[10px] sm:text-xs font-bold font-sans text-neutral-600 mb-1">
+                          <div className="flex items-center justify-between text-[10px] sm:text-xs font-bold font-sans text-neutral-300 mb-1">
                             <span>共识: {z.strength}次</span>
                             <span>{Math.round(progressWidthPct)}%</span>
                           </div>
@@ -321,14 +321,14 @@ export default function PatternList({
                   {displayLabel}
                 </h4>
 
-                <div className="flex items-center gap-3.5 text-xs text-neutral-400 font-mono mt-0.5">
+                <div className="flex items-center gap-3.5 text-xs text-neutral-300 font-mono mt-0.5">
                   <div className="flex flex-col">
-                    <span className="text-[9px] text-neutral-500 uppercase tracking-wider">置信度</span>
+                    <span className="text-[9px] text-neutral-300 uppercase tracking-wider">置信度</span>
                     <span className="text-amber-500 font-bold">{Math.round(activeFocus.confidence * 100)}%</span>
                   </div>
                   <div className="h-6 w-[1px] bg-neutral-800" />
                   <div className="flex flex-col">
-                    <span className="text-[9px] text-neutral-500 uppercase tracking-wider">参考价</span>
+                    <span className="text-[9px] text-neutral-300 uppercase tracking-wider">参考价</span>
                     <span className="text-neutral-200 font-bold">${activeFocus.price.toFixed(2)}</span>
                   </div>
                 </div>
@@ -372,7 +372,7 @@ export default function PatternList({
                 <div className="w-1.5 h-1.5 rounded-full bg-cyan-500 animate-pulse" />
                 裸K实战对抗
               </span>
-              <p className="text-[11px] text-neutral-400 leading-relaxed font-sans pr-1">
+              <p className="text-[11px] text-neutral-300 leading-relaxed font-sans pr-1">
                 屏蔽形态信号右侧 K 线，研判下一步发力方向
               </p>
               
@@ -415,9 +415,9 @@ export default function PatternList({
               </div>
 
               <div className="flex flex-col text-left justify-center select-none shrink-0">
-                <span className="text-[8px] sm:text-[9px] text-neutral-500 font-bold uppercase tracking-wider">胜率得分</span>
+                <span className="text-[8px] sm:text-[9px] text-neutral-300 font-bold uppercase tracking-wider">胜率得分</span>
                 <span className="text-xs sm:text-xs font-black font-mono text-white tracking-wide mt-0.5">
-                  {quizScore.wins} <span className="text-neutral-600 font-normal">/</span> {quizScore.total}
+                  {quizScore.wins} <span className="text-neutral-400 font-normal">/</span> {quizScore.total}
                 </span>
               </div>
             </div>
@@ -448,9 +448,9 @@ export default function PatternList({
 
 
         {patterns.length === 0 ? (
-          <div className="text-center py-6 text-slate-500">
+          <div className="text-center py-6 text-slate-300">
             <p className="text-xs">暂未捕捉到高置信度多空信号</p>
-            <p className="text-[9px] text-slate-600 mt-1">请尝试平移或缩放图表，或切换到“日K”载入大周期结构</p>
+            <p className="text-[9px] text-slate-400 mt-1">请尝试平移或缩放图表，或切换到“日K”载入大周期结构</p>
           </div>
         ) : (
           <div className="space-y-2 flex-1 flex flex-col min-h-0">
@@ -489,7 +489,7 @@ export default function PatternList({
                           {getPatternDisplayLabel(p.type, p.name)}
                         </span>
                       </div>
-                      <div className="text-[8px] sm:text-[9px] text-slate-400 font-mono mt-0.5 sm:mt-1 flex items-center gap-1 sm:gap-1.5 justify-start">
+                      <div className="text-[10px] sm:text-[11px] text-neutral-200 font-semibold font-mono mt-0.5 sm:mt-1 flex items-center gap-1 sm:gap-1.5 justify-start">
                         <span>临界价: ${p.price}</span>
                         <span>·</span>
                         <span className={`${accentColor} font-bold`}>权重: {Math.round(p.confidence * 100)}%</span>
@@ -505,7 +505,7 @@ export default function PatternList({
             {patterns.length > 4 && (
               <button
                 onClick={() => setShowAllBehaviors(!showAllBehaviors)}
-                className="w-full py-2 sm:py-2 border border-dashed border-neutral-800 hover:border-white text-slate-400 hover:text-white text-[9px] sm:text-[10px] font-mono rounded-none transition-all flex items-center justify-center gap-1 cursor-pointer mt-1 min-h-[36px] sm:min-h-0"
+                className="w-full py-2 sm:py-2 border border-dashed border-neutral-800 hover:border-white text-slate-300 hover:text-white text-[9px] sm:text-[10px] font-mono rounded-none transition-all flex items-center justify-center gap-1 cursor-pointer mt-1 min-h-[36px] sm:min-h-0"
               >
                 {showAllBehaviors ? (
                   <>

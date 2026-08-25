@@ -17,6 +17,7 @@ const PATTERN_CATEGORIES = [
 const CROSSHAIR_DATE_BADGE_MAX_WIDTH = 220;
 const CROSSHAIR_DATE_BADGE_HEIGHT = 28;
 const CROSSHAIR_DATE_FONT_SIZE = 14;
+const SR_ZONE_LABEL_FONT_SIZE = 12;
 
 const getPatternLabel = (type: string, name: string): string => {
   switch (type) {
@@ -925,9 +926,11 @@ export default function PriceActionChart({
           {/* Tag text */}
           <text
             x={chartWidth - 5}
-            y={y - 4}
+            y={y - 5}
             textAnchor="end"
-            className={`font-mono text-[9px] font-medium ${
+            fontSize={SR_ZONE_LABEL_FONT_SIZE}
+            fontWeight={700}
+            className={`font-mono ${
               isSupport 
                 ? "fill-[#00c805]" 
                 : isResistance 
@@ -1720,9 +1723,12 @@ export default function PriceActionChart({
       </div>
 
       {/* Synchronized timeline scrollbar/minimap */}
-      <div className="px-5 py-2 bg-[#000000] border-t border-[#1e222d] flex items-center justify-between text-[10px] font-mono text-slate-400">
-        <span>
-          范围: {visibleCandles.length > 0 ? getETFormattedString(visibleCandles[0].time) : ""} ~ {visibleCandles.length > 0 ? getETFormattedString(visibleCandles[visibleCandles.length - 1].time) : ""}
+      <div className="px-5 py-2.5 bg-[#000000] border-t border-[#1e222d] flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-[13px] leading-5 font-mono text-slate-300">
+        <span className="inline-flex flex-wrap items-center gap-x-1">
+          <span>范围:</span>
+          <span className="whitespace-nowrap">{visibleCandles.length > 0 ? getETFormattedString(visibleCandles[0].time) : ""}</span>
+          <span>~</span>
+          <span className="whitespace-nowrap">{visibleCandles.length > 0 ? getETFormattedString(visibleCandles[visibleCandles.length - 1].time) : ""}</span>
         </span>
         <div className="flex items-center gap-2">
           <span>{totalCandles} 根数据点</span>
