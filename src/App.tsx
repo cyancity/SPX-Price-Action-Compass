@@ -633,29 +633,28 @@ export default function App() {
           <div className="text-center sm:text-left tracking-wider bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent font-bold">
             © 2026 {symbol.toUpperCase()} Price Action Compass · 数据延迟 (15 min) · 非投资建议 学习用途
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <a
               href="https://x.com/mm_options"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-white hover:text-white border border-neutral-800 hover:border-neutral-600 bg-neutral-900/60 backdrop-blur-sm px-2.5 py-1 rounded transition-all duration-300 hover:shadow-[0_0_12px_rgba(255,255,255,0.06)] cursor-pointer"
+              className="flex h-7 w-7 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900/50 text-neutral-400 transition-all duration-200 hover:border-neutral-600 hover:bg-neutral-800 hover:text-white cursor-pointer"
               title="Follow @mm_options on X"
               aria-label="Follow @mm_options on X"
             >
-              <svg viewBox="0 0 24 24" aria-hidden="true" className="w-3.5 h-3.5 fill-current">
+              <svg viewBox="0 0 24 24" aria-hidden="true" className="h-3 w-3 fill-current">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
               </svg>
-              <span className="font-bold tracking-widest text-[9px] bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">@mm_options</span>
             </a>
             <a
               href="https://github.com/kain26/SPX-Price-Action-Compass"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-white hover:text-white border border-neutral-800 hover:border-neutral-600 bg-neutral-900/60 backdrop-blur-sm px-2.5 py-1 rounded transition-all duration-300 hover:shadow-[0_0_12px_rgba(255,255,255,0.06)] cursor-pointer"
+              className="flex h-7 w-7 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900/50 text-neutral-400 transition-all duration-200 hover:border-neutral-600 hover:bg-neutral-800 hover:text-white cursor-pointer"
               title="View on GitHub"
+              aria-label="View project on GitHub"
             >
-              <Github className="w-3.5 h-3.5 text-white" />
-              <span className="font-bold tracking-widest uppercase text-[9px] bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent">GitHub Repo</span>
+              <Github className="h-3.5 w-3.5" />
             </a>
           </div>
         </div>
